@@ -9,3 +9,9 @@ dependencies = [
     "discord-py>=2.5.2",
     "python-dotenv>=1.1.1",
 ]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+]
