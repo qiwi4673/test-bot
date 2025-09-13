@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 from keep_alive import keep_alive
 
 intents = discord.Intents.default()
@@ -20,8 +21,16 @@ async def on_message(message):
     await message.add_reaction(emoji)
 
     # 特定のメッセージへの応答
-    if message.content.startswith('hello'):
-        await message.channel.send('Hello!')
+    if message.content.startswith('hello'):  # <-- プレフィックスを追加してコマンドとして扱う
+        # ランダムに選ぶ返信のリスト
+        responses = [
+            'Hello!',
+            'こんにちは！',
+            'やあ！',
+            'どうも！'
+        ]
+        # リストからランダムに1つ選んで送信
+        await message.channel.send(random.choice(responses))
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
