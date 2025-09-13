@@ -37,11 +37,9 @@ async def on_message(message):
 
         # 成功・失敗の判定
         if dice_result <= 5:
-            await message.reply(f'rolled: **{dice_result}** ')
-            await message.reply('クリティカル！')
+            await message.reply(f'rolled: **{dice_result}** ¥n クリティカル！')
         elif dice_result >= 96:
-            await message.reply(f'rolled: **{dice_result}** ')
-            await message.reply('ファンブル...')
+            await message.reply(f'rolled: **{dice_result}** ¥n ファンブル...')
         else
             await message.reply(f'rolled: **{dice_result}** ')
 TOKEN = os.getenv("DISCORD_TOKEN")
