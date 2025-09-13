@@ -34,14 +34,15 @@ async def on_message(message):
     elif message.content.startswith('たけ'):
         # 1から6までの整数をランダムに生成
         dice_result = random.randint(1, 100)
+        
+        # 結果をメッセージとして送信
+        await message.channel.reply(f'rolled: **{dice_result}** ')
 
         # 成功・失敗の判定
         if dice_result <= 5:
-            await message.reply(f'rolled: **{dice_result}** ¥n クリティカル！')
+            await message.channel.send('✅ 成功です！')
         elif dice_result >= 96:
-            await message.reply(f'rolled: **{dice_result}** ¥n ファンブル...')
-        else
-            await message.reply(f'rolled: **{dice_result}** ')
+            await message.channel.send('❌ 失敗です...')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
