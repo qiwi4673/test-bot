@@ -33,15 +33,15 @@ async def on_message(message):
         await message.channel.send(random.choice(responses))
     elif message.content.startswith('!roll'):
         # 1から6までの整数をランダムに生成
-        dice_result = random.randint(1, 6)
+        dice_result = random.randint(1, 100)
         
         # 結果をメッセージとして送信
         await message.channel.send(f'🎲 サイコロを振りました... 出た目は **{dice_result}** です！')
 
         # 成功・失敗の判定
-        if dice_result <= 2:
+        if dice_result <= 5:
             await message.channel.send('✅ 成功です！')
-        elif dice_result >= 5:
+        elif dice_result >= 96:
             await message.channel.send('❌ 失敗です...')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
