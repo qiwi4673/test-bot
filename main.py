@@ -41,7 +41,7 @@ async def on_message(message):
         # 結果を一つのメッセージにまとめてリプライとして送信
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
     if 'たの' in message.content:
-        custom_emoji = client.get_emoji(1416437259091054602)
+        custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
             await message.add_reaction(custom_emoji)
 TOKEN = os.getenv("DISCORD_TOKEN")
