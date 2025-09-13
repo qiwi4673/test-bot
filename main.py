@@ -31,12 +31,13 @@ async def on_message(message):
         ]
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
+        
     elif message.content.startswith('たけ'):
         # 1から6までの整数をランダムに生成
         dice_result = random.randint(1, 100)
         
         # 結果をメッセージとして送信
-        await message.channel.reply(f'rolled: **{dice_result}** ')
+        await message.reply(f'rolled: **{dice_result}** ')
 
         # 成功・失敗の判定
         if dice_result <= 5:
