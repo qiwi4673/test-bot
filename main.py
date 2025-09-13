@@ -16,10 +16,6 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # 絵文字の追加
-    emoji = "🐌"
-    await message.add_reaction(emoji)
-
     # 特定のメッセージへの応答
     if message.content.startswith('んろう、ごはん'):  # <-- プレフィックスを追加してコマンドとして扱う
         # ランダムに選ぶ返信のリスト
