@@ -32,7 +32,7 @@ async def on_message(message):
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
         
-    elif message.content == "たけ":
+    elif message.content == 'たけ':
         # 1から6までの整数をランダムに生成
         dice_result = random.randint(1, 100)
         
@@ -44,7 +44,17 @@ async def on_message(message):
             result_text = '🟪ファンブル...'
         # 結果を一つのメッセージにまとめてリプライとして送信
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
-    elif message.content.startswith
+    elif message.content.startswith('んろう')
+    res = [
+        '今日も調子が',
+        'んにゃ',
+        '全知全能',
+        'わたしはボブ',
+        '水の代わりに味噌汁',
+        '麻雀で25000点だよ'
+    ]
+    await message.channel.send(random.choice(res))
+    
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
