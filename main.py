@@ -19,14 +19,7 @@ async def on_message(message):
     emoji ="👍"
     await message.add_reaction(emoji)
 
-@bot.event
-async def on_message(message: discord.Message):
-    """メッセージをおうむ返しにする処理"""
 
-    if message.author.bot: # ボットのメッセージは無視
-        return
-
-    await message.reply(message.content)
 
 
 
