@@ -34,18 +34,17 @@ async def on_message(message):
         
     elif message.content.startswith('たけ'):
         # 1から6までの整数をランダムに生成
-        dice_result = random.randint(1, 100)
+        dice_result = random.randint(1, 6)
         
-        # 結果をメッセージとして送信
-        print(dice_result)
-        
-        # 成功・失敗の判定
-        if dice_result <= 5:
-            await message.channel.send('✅ 成功です！')
-        elif dice_result >= 96:
-            await message.channel.send('❌ 失敗です...')
-        else
-            await message.reply(f'rolled: **{dice_result}** ')
+        # 結果の判定
+        result_text = '' # 結果のテキストを初期化
+        if dice_result <= 2:
+            result_text = '✅ 成功です！'
+        elif dice_result >= 5:
+            result_text = '❌ 失敗です...'
+
+        # 結果を一つのメッセージにまとめてリプライとして送信
+        await message.reply(f'🎲 サイコロを振りました... 出た目は **{dice_result}** です！\n{result_text}')
 
 
 TOKEN = os.getenv("DISCORD_TOKEN")
