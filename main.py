@@ -36,13 +36,13 @@ async def on_message(message):
         dice_result = random.randint(1, 100)
         
         # 結果をメッセージとして送信
-        await message.channel.send(f'🎲 サイコロを振りました... 出た目は **{dice_result}** です！')
+        await message.channel.send(f'rolled: **{dice_result}** ')
 
         # 成功・失敗の判定
         if dice_result <= 5:
-            await message.channel.send('✅ 成功です！')
+            await message.channel.send('クリティカル！')
         elif dice_result >= 96:
-            await message.channel.send('❌ 失敗です...')
+            await message.channel.send('ファンブル...')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
