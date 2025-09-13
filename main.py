@@ -54,8 +54,7 @@ async def on_message(message):
         '水の代わりに味噌汁',
         '麻雀で25000点だよ'
     ]
-    
-    await message.channel.send(random.choice(res))
+        await message.channel.send(random.choice(res))
     
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
