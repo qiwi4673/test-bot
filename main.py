@@ -2,9 +2,7 @@ import discord
 import os
 from keep_alive import keep_alive
 
-intents = discord.Intents.default()
-intents.message_content = True
-client = discord.Client(intents=intents)
+client = discord.Client(intents=discord.Intents.default())
 
 @client.event
 async def on_ready():
@@ -12,23 +10,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    # Bot自身のメッセージには応答しないようにします
-    if message.author == client.user:
-        return
-
-    # メッセージに 👍 の絵文字を追加
-    emoji = "👍"
+    emoji ="👍"
     await message.add_reaction(emoji)
 
-    # メッセージの内容が 'hello' だった場合
-    if message.content.startswith('hello'):
-        # メッセージが送られたチャンネルに 'Hello!' と返信します
-        await message.channel.send('Hello!')
-
-keep_alive()
-
 TOKEN = os.getenv("DISCORD_TOKEN")
-if TOKEN:
-    client.run(TOKEN)
-else:
-    print("Tokenが見つかりませんでした")
+# Web サーバの立ち上げ
+keep_alive()
+client.run(TOKEN)
