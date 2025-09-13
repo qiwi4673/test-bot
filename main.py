@@ -16,7 +16,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    emoji ="👍"
+    emoji ="🐌"
     await message.add_reaction(emoji)
 
 
