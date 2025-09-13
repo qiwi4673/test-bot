@@ -12,13 +12,14 @@ load_dotenv(verbose=True)
 
 @client.event
 async def on_ready():
-    print("ログインしました")
+    print('ログインしました')
 
-
-keep_alive()
+@client.event
+async def on_message(message):
+    emoji ="👍"
+    await message.add_reaction(emoji)
 
 TOKEN = os.getenv("DISCORD_TOKEN")
-if TOKEN:
-    client.run(TOKEN)
-else:
-    print("Tokenが見つかりませんでした")
+# Web サーバの立ち上げ
+keep_alive()
+client.run(TOKEN)
