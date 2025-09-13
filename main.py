@@ -1,44 +1,27 @@
-import os
-from os.path import dirname, join
-
 import discord
-from dotenv import load_dotenv
+from discord.ext import commands
 
-from keep_alive import keep_alive
-
+# インテントの設定
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-
-load_dotenv(verbose=True)
-
+# ボットがオンラインになったときのイベント
 @client.event
 async def on_ready():
-    print('ログインしました')
+    print(f'{client.user}としてログインしました。')
+    print('------')
 
+# メッセージが送られたときのイベント
 @client.event
 async def on_message(message):
-    emoji ="🐌"
-    await message.add_reaction(emoji)
-
-@client.event
-async def on_message(message):
-    # Bot自身のメッセージには応答しないようにします
+    # ボット自身のメッセージを無視
     if message.author == client.user:
         return
 
-    # メッセージの内容が 'hello' だった場合
-    if message.content.startswith('やあ'):
-        # メッセージが送られたチャンネルに 'Hello!' と返信します
-        await message.channel.send('やあ')
+    # メッセージが "ping" で始まっていたら
+    if message.content.startswith('ping'):
+        await message.channel.send('pong!')
 
-# 開発者ポータルで取得したボットトークンを設定
+# トークンを設定してボットを実行
 # client.run('YOUR_BOT_TOKEN_HERE')
-
-
-
-TOKEN = os.getenv("DISCORD_TOKEN")
-# Web サーバの立ち上げ
-keep_alive()
-client.run(TOKEN)
