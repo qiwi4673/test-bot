@@ -1,27 +1,28 @@
 import discord
-from discord.ext import commands
+import os
+from keep_alive import keep_alive
 
-# インテントの設定
+client = discord.Client(intents=discord.Intents.default())
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+bomb = discord.Client(intents=intents)
 
-# ボットがオンラインになったときのイベント
 @client.event
 async def on_ready():
-    print(f'{client.user}としてログインしました。')
-    print('------')
+    print('ログインしました')
 
-# メッセージが送られたときのイベント
 @client.event
 async def on_message(message):
-    # ボット自身のメッセージを無視
-    if message.author == client.user:
+    emoji ="👍"
+    await message.add_reaction(emoji)
+
+@client.event
+async def on_message(message):
+    # Bot自身のメッセージには応答しないようにします
+    if message.author == bomb.user:
         return
 
-    # メッセージが "ping" で始まっていたら
-    if message.content.startswith('ping'):
-        await message.channel.send('pong!')
-
-# トークンを設定してボットを実行
-# client.run('YOUR_BOT_TOKEN_HERE')
+    # メッセージの内容が 'hello' だった場合
+    if message.content.startswith('やっ'):
+        # メッセージが送られたチャンネルに 'Hello!' と返信します
+        await message.channel.send('やっ')
