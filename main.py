@@ -13,3 +13,10 @@ async def on_message(message):
     emoji ="👍"
     await message.add_reaction(emoji)
 
+keep_alive()
+
+TOKEN = os.getenv("DISCORD_TOKEN")
+if TOKEN:
+    client.run(TOKEN)
+else:
+    print("Tokenが見つかりませんでした")
