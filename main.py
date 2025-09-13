@@ -31,7 +31,7 @@ async def on_message(message):
         ]
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
-    elif message.content.startswith('!roll'):
+    elif message.content.startswith('たけ'):
         # 1から6までの整数をランダムに生成
         dice_result = random.randint(1, 100)
         
