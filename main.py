@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 
 from keep_alive import keep_alive
 
-client = discord.Client(intents=discord.Intents.default())
-
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
