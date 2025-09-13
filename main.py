@@ -44,7 +44,7 @@ async def on_message(message):
             result_text = '🟪ファンブル...'
 
         # 結果を一つのメッセージにまとめてリプライとして送信
-        await message.reply(f'🎲 サイコロを振りました... 出た目は **{dice_result}** です！\n{result_text}')
+        await message.reply(f'rolled: **{dice_result}** \n{result_text}')
 
 
 TOKEN = os.getenv("DISCORD_TOKEN")
