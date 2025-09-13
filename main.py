@@ -45,7 +45,7 @@ async def on_message(message):
         # 結果を一つのメッセージにまとめてリプライとして送信
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
         
-    elif message.content.startswith('んろう')
+    elif message.content.startswith('んろう'):
     res = [
         '今日も調子が',
         'んにゃ',
