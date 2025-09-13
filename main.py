@@ -17,8 +17,8 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # メッセージに 🐦‍🔥 の絵文字を追加
-    emoji = "🐦‍🔥"
+    # メッセージに 🐌 の絵文字を追加
+    emoji = "🐌"
     await message.add_reaction(emoji)
 
     # メッセージの内容が 'hello' で始まる場合、'Hello!' と返信する
