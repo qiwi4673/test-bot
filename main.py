@@ -21,13 +21,13 @@ async def on_message(message):
     await message.add_reaction(emoji)
 
     # 特定のメッセージへの応答
-    if message.content.startswith('hello'):  # <-- プレフィックスを追加してコマンドとして扱う
+    if message.content.startswith('んろう、ごはん'):  # <-- プレフィックスを追加してコマンドとして扱う
         # ランダムに選ぶ返信のリスト
         responses = [
-            'Hello!',
-            'こんにちは！',
-            'やあ！',
-            'どうも！'
+            'イチジク',
+            'スープ',
+            '味噌汁',
+            '御御御付'
         ]
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
