@@ -25,7 +25,12 @@ async def on_message(message):
     if message.content.startswith('hello'):
         await message.channel.send('Hello!')
 
-TOKEN = os.getenv("DISCORD_TOKEN")
-# Web サーバーの立ち上げ
+# Webサーバーの立ち上げ（**ボットの実行前に配置**）
 keep_alive()
-client.run(TOKEN)
+
+# ボットの実行
+TOKEN = os.getenv("DISCORD_TOKEN")
+if TOKEN:
+    client.run(TOKEN)
+else:
+    print("Tokenが見つかりませんでした")
