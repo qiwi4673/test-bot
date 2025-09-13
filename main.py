@@ -24,6 +24,7 @@ async def on_message(message):
     emoji ="🐌"
     await message.add_reaction(emoji)
 
+@client.event
 async def on_message(message):
     # Bot自身のメッセージには応答しないようにします
     if message.author == client.user:
