@@ -40,7 +40,8 @@ async def on_message(message):
             result_text = '🟪ファンブル...'
         # 結果を一つのメッセージにまとめてリプライとして送信
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
-    
+    if 'しん' in message.content:
+        await message.add_reaction('👍')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
