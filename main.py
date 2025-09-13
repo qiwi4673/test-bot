@@ -16,13 +16,3 @@ async def on_message(message):
     emoji ="👍"
     await message.add_reaction(emoji)
 
-@client.event
-async def on_message(message):
-    # Bot自身のメッセージには応答しないようにします
-    if message.author == bomb.user:
-        return
-
-    # メッセージの内容が 'hello' だった場合
-    if message.content.startswith('やっ'):
-        # メッセージが送られたチャンネルに 'Hello!' と返信します
-        await message.channel.send('やっ')
