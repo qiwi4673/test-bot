@@ -32,7 +32,7 @@ async def on_message(message):
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
         
-    elif message.content.startswith('たけ'):
+    elif message.content == "たけ":
         # 1から6までの整数をランダムに生成
         dice_result = random.randint(1, 100)
         
@@ -42,11 +42,9 @@ async def on_message(message):
             result_text = '🟨クリティカル！'
         elif dice_result >= 96:
             result_text = '🟪ファンブル...'
-
         # 結果を一つのメッセージにまとめてリプライとして送信
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
-
-
+    elif message.content.startswith
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
