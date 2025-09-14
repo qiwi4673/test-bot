@@ -76,7 +76,6 @@ async def on_message(message):
         # 各リストからランダムに1つずつ選択
         random_subject = random.choice(subject)
         random_action = random.choice(action)
-        
         # 2つの要素を組み合わせて返信
         await message.channel.send(f'{random_subject}{random_action}。')
 TOKEN = os.getenv("DISCORD_TOKEN")
