@@ -52,6 +52,11 @@ async def on_message(message):
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
             await message.add_reaction(custom_emoji)
+    
+    if 'タノ' in message.content:
+        custom_emoji = client.get_emoji(1415213398546714704)
+        if custom_emoji:
+            await message.add_reaction(custom_emoji)
 
     # 'んろう、こんだて' に応答する部分
     if message.content.startswith('んろう、こんだて'):
