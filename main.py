@@ -20,10 +20,11 @@ async def on_message(message):
     if message.content.startswith('んろう、ごはん'):  # <-- プレフィックスを追加してコマンドとして扱う
         # ランダムに選ぶ返信のリスト
         responses = [
-            'イチジク',
-            'スープ',
-            '味噌汁',
-            '御御御付'
+            'きゅうりの浅漬け',
+            'きゅうりの深漬け',
+            'きゅうりの漬け物',
+            'きゅうりの糠漬け',
+            '味噌漬けきゅうり'
         ]
         # リストからランダムに1つ選んで送信
         await message.channel.send(random.choice(responses))
