@@ -78,7 +78,7 @@ async def on_message(message):
         random_action = random.choice(action)
         
         # 2つの要素を組み合わせて返信
-        await message.channel.send(f'はい \n {random_subject}{random_action}。')
+        await message.channel.send(f'{random_subject}{random_action}。')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
 keep_alive()
