@@ -72,11 +72,8 @@ async def on_message(message):
     "を蒸し焼きにしたもの", "の炒め煮", "を炊いたもの", "の網焼き", "の串焼き",
     "のソテー", "のグリル", "をローストしたもの", "のポシェ", "をフランベしたもの"
 ]
-        
-        # 各リストからランダムに1つずつ選択
         random_subject = random.choice(subject)
         random_action = random.choice(action)
-        # 2つの要素を組み合わせて返信
         await message.channel.send(f'{random_subject}{random_action}。')
 TOKEN = os.getenv("DISCORD_TOKEN")
 # Web サーバの立ち上げ
