@@ -79,7 +79,7 @@ async def on_message(message):
         ]
         random_subject = random.choice(subject)
         random_action = random.choice(action)
-        await message.channel.send(f'{random_subject}{random_action}はいかが')
+        await message.channel.send(f'{random_subject}{random_action}はいかが？')
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
