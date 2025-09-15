@@ -109,6 +109,16 @@ async def on_message(message):
             random_letter = random.choice(letter)
             await message.channel.send(f'{random_agreement}、{random_letter}〜。')
 
+    if message.content.startswith('ぼれろ、えもじ'):
+        animal_emojis = [
+    '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯',
+    '🦁', '🐮', '🐷', '🐸', '🐵', '🐒', '🐔', '🐧', '🦅', '🦉',
+    '🐴', '🦄', '🐺', '🐗', '🐘', '🦏', '🦌', '🐊', '🐉', '🦖',
+    '🦕', '🐢', '🐍', '🐙', '🐠', '🐳', '🐝', '🐞', '🦋', '🐌'
+]
+        random_emoji = random.choice(animal_emojis)
+        await message.add_reaction(random_emoji)
+        
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
 client.run(TOKEN)
