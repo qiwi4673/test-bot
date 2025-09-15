@@ -79,7 +79,14 @@ async def on_message(message):
         ]
         random_subject = random.choice(subject)
         random_action = random.choice(action)
-        await message.channel.send(f'{random_subject}{random_action}はいかが？')
+        await message.channel.send(f'{random_subject}{random_action}はどうかな？')
+
+    if message.content.startswith('ぼれろ〜'):
+        agreement =['うんうん','たしかに','そっか','知らなかった','すごく','はい','えっとね','えっ','へぇ〜','なんと','でも','まじか']
+        letter = ['おなかすいた','のどかわいた','ねむい']
+        random_subject = random.choice(subject)
+        random_action = random.choice(action)
+        await message.channel.send(f'{random_agreement}、{random_letter}ね〜。')
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
