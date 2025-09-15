@@ -98,7 +98,9 @@ async def on_message(message):
     if message.content.startswith('ぼれろ〜'):
         # メッセージが「ぼれろ〜」のみの場合
         if len(message.content.strip()) == 4:
-            await message.channel.send('どうしました〜？')
+            commonreply = ['どうしました','なぁに']
+            random_commonreply = random.choice(commonreply)
+            await message.channel.send(f'{random_commonreply}〜？')
         # 5文字以上の場合
         elif len(message.content) > 4:
             agreement =['うんうん','たしかに','そっか','知らなかった','すごく','はい','えっとね','えっ','へぇ〜','なんと','でも','まじか','わっ']
