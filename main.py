@@ -104,7 +104,7 @@ async def on_message(message):
         # 5文字以上の場合
         elif len(message.content) > 4:
             agreement =['うんうん','たしかに','そっか','知らなかった','すごく','はい','えっとね','えっ','へぇ〜','なんと','でも','まじか','わっ']
-            letter = ['おなかすいたね','のどかわいたね','ねむいね','おはようの時間だね','いいね','おやすみの時間だね','ナントの勅令だよ','土砂降りだ','おばけかも']
+            letter = ['おなかすいたね','のどかわいたね','ねむいね','おはようの時間だね','いいね','おやすみの時間だね','ナントの勅令だよ','土砂降りだ','おばけかも','かっこいい','とても晴れてるよ']
             random_agreement = random.choice(agreement)
             random_letter = random.choice(letter)
             await message.channel.send(f'{random_agreement}、{random_letter}〜。')
