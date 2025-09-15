@@ -102,37 +102,7 @@ async def on_message(message):
         random_letter = random.choice(letter)
         await message.channel.send(f'{random_agreement}、{random_letter}〜。')
 
-     if message.content.startswith('debug'):
-        # 1から100までの整数をランダムに生成
-        dice_result = random.randint(1, 100)
-        
-        # 結果のテキストを初期化
-        result_text = ''
-        
-        # 'ハード'が含まれているかチェック
-        if 'ハード' in message.content:
-            if dice_result <= 10:
-                result_text = '✅ 成功です！（ハードモード）'
-            elif dice_result >= 90:
-                result_text = '❌ 失敗です...（ハードモード）'
-        
-        # 'イージー'が含まれているかチェック
-        elif 'イージー' in message.content:
-            if dice_result <= 50:
-                result_text = '✅ 成功です！（イージーモード）'
-            elif dice_result >= 90:
-                result_text = '❌ 失敗です...（イージーモード）'
-        
-        # 'ハード'も'イージー'も含まれていない場合
-        else:
-            if dice_result <= 2:
-                result_text = '✅ 成功です！'
-            elif dice_result >= 5:
-                result_text = '❌ 失敗です...'
-
-        # 結果を一つのメッセージにまとめてリプライとして送信
-        await message.reply(f'🎲 サイコロを振りました... 出た目は **{dice_result}** です！\n{result_text}')
-
+     
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
