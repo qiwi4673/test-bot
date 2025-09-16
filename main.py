@@ -126,7 +126,7 @@ async def on_message(message):
 
     # メッセージの末尾が「かな？」で終わるかチェック
     if message.content.strip().endswith('かな？'):
-        questionagree = ['うん、','えっ','う〜ん']
+        questionagree = ['うん、','えっ','う〜ん','ん〜']
         questionletter = ['違うかも〜','そうかも〜','違うよ〜','そうだよ〜']
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
