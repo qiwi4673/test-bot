@@ -125,8 +125,12 @@ async def on_message(message):
         await message.add_reaction(random_emoji)
 
     # メッセージの末尾が「かな？」で終わるかチェック
-    if message.content.strip().endswith('か？'):
-        await message.channel.send('ど？')
+    if message.content.strip().endswith('かな？'):
+        questionagree = ['うん、','えっ','う〜ん']
+        questionletter = ['違うかも〜','そうかも〜','違うよ〜','それだよ〜']
+        random_questionagree = random.choice(questionagree)
+        random_questionletter = random.choice(questionletter)
+        await message.channel.send(f'{random_questionagree}{random_questionletter}。')
 
 
 TOKEN = os.getenv("DISCORD_TOKEN")
