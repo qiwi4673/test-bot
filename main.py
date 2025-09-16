@@ -10,6 +10,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
+     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="世界"))
 
 @client.event
 async def on_message(message):
