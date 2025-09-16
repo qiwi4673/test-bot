@@ -123,7 +123,15 @@ async def on_message(message):
 ]
         random_emoji = random.choice(animal_emojis)
         await message.add_reaction(random_emoji)
-        
+
+    @client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    # メッセージの末尾が「かな？」で終わるかチェック
+    if message.content.strip().endswith('か？'):
+        await message.channel.send('ど？')
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
 client.run(TOKEN)
