@@ -79,6 +79,12 @@ async def on_message(message):
         if custom_emoji:
             await message.add_reaction(custom_emoji)
 
+    if 'TANO' in message.content:
+        custom_emoji = client.get_emoji(1415213398546714704)
+        if custom_emoji:
+            await message.add_reaction(custom_emoji)
+
+    
     if '楽しい' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
