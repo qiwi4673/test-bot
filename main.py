@@ -94,7 +94,7 @@ async def on_message(message):
         if custom_emoji:
             await message.add_reaction(custom_emoji)
 
-    # ぼれろ、こんだて
+
     if message.content.startswith('ぼれろ、こんだて'):
         subject = ['そば', 'フカヒレスープ', 'パフェ', '小籠包', 'レモン', 'アイスクリーム', 'シュウマイ', 'スープ', '寿司', '春巻き', 'ワッフル', 'ローストチキン', 'シリアル', 'パスタ', 'カツ丼', 'カヌレ', 'フレンチトースト', 'オレンジジュース', '酢豚', '餃子', 'プリン', 'もつ鍋', 'クリームチーズ', 'パンケーキ', 'ナッツ', 'カレーライス', 'ホットドッグ', 'ショートケーキ', 'フォンダンショコラ', 'スパゲッティ', 'クロワッサン', 'サンドイッチ', 'ミルク', '親子丼', '紅茶', 'しゃぶしゃぶ', 'エビフライ', 'トマト鍋', 'ハンバーガー', 'ドーナツ', 'ピザ', '麻婆豆腐', '北京ダック', '牛丼', 'たこ焼き', 'うどん', 'マカロン', 'パンナコッタ', 'フライドポテト', '天ぷら', '味噌汁', '回鍋肉', 'キムチ鍋', 'クッキー', 'ラーメン', 'クレープ', '焼き肉', 'エビチリ', 'コーヒー', 'マフィン', 'チーズケーキ']
         action = [
@@ -107,7 +107,7 @@ async def on_message(message):
         random_action = random.choice(action)
         await message.channel.send(f'{random_subject}{random_action}はどうかな？')
 
-    # ぼれろ〜
+
     if message.content.startswith('ぼれろ〜'):
         if len(message.content.strip()) == 4:
             commonreply = ['どうしました〜？','なぁに〜？','ん〜？','とってもすごいBoleroです！']
