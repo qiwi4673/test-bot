@@ -44,7 +44,7 @@ async def on_message(message):
 
     # 全てのコマンドを一つのif/elifチェーンにまとめる
     if message.content.startswith('ぼれろ、しょうかい'):
-        await message.channel.send(f'{message.author.display_name}さんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
+        await message.channel.send(f'{message.author.display_name}ちゃんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
 
     elif message.content.startswith('ぼれろ、おこづかい'):
         # クールダウンの設定 (秒)
@@ -53,14 +53,14 @@ async def on_message(message):
         # 最後に獲得した時間をチェック
         if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
             remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
-            await message.channel.send(f'{message.author.display_name}さん、もうもらったでしょ〜')
+            await message.channel.send(f'{message.author.display_name}ちゃん、もうもらったでしょ〜')
         else:
             # 新しい通貨を獲得
             earned = random.randint(200, 400)
             currency[user_id] += earned
             last_earn_times[user_id] = time.time()  # タイムスタンプを更新
             save_currency(currency)
-            await message.channel.send(f'{message.author.display_name}さんに {earned} ターノあげる〜！')
+            await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
     elif message.content == 'ぼれろ、おみくじ':
         # 消費する金額を180に固定
@@ -72,7 +72,7 @@ async def on_message(message):
             save_currency(currency)
             await message.channel.send(f'{message.author.display_name}は {amount_to_spend} コインを消費しました。')
         else:
-            await message.channel.send(f'{message.author.display_name}、残高が足りません。')
+            await message.channel.send(f'わわっ、{message.author.display_name}ちゃんのターノが足りないみたい......!')
 
     elif message.content.startswith('ぼれろ、ごはん'):
         responses = [
