@@ -43,10 +43,10 @@ async def on_message(message):
         save_currency(currency)
 
     # 全てのコマンドを一つのif/elifチェーンにまとめる
-    if message.content.startswith('ぼれろ、'):
+    if message.content.startswith('ぼれろ、しょうかい'):
         await message.channel.send(f'{message.author.display_name}さんの現在の残高は {currency[user_id]} コインです。')
 
-    elif message.content.startswith('ぼれろ、おこづかいをくださいな'):
+    elif message.content.startswith('ぼれろ、おこづかい'):
         # クールダウンの設定 (秒)
         cooldown_time = 86400
         
