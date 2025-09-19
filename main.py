@@ -1,7 +1,22 @@
 import discord
 import os
 import random
+import json
 from keep_alive import keep_alive
+
+# 1. ユーザーデータの読み込みと保存
+def load_currency():
+    try:
+        with open('currency.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def save_currency(currency_data):
+    with open('currency.json', 'w') as f:
+        json.dump(currency_data, f, indent=4)
+
+currency = load_currency()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -10,14 +25,59 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name="三輪車レース"))
+    await client.change_presence(activity=discord.Game(name="お料理"))
 
-@client.event
+    @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
+    if message.author.bot:
+        return
+    
+    user_id = str(message.author.id)
+
+    # ユーザーが辞書に存在しない場合は初期化
+    if user_id not in currency:
+        currency[user_id] = 0
+        save_currency(currency)
+
+    # '!balance' コマンドで残高を表示
+    if message.content.startswith('!balance'):
+        await message.channel.send(f'{message.author.mention}の現在の残高は {currency[user_id]} コインです。')
+
+    # '!earn' コマンドで通貨を増やす
+    elif message.content.startswith('!earn'):
+        earned = random.randint(1, 10)
+        currency[user_id] += earned
+        save_currency(currency)
+        await message.channel.send(f'{message.author.mention}は {earned} コインを獲得しました！')
+
+    # '!spend' コマンドで通貨を消費
+    elif message.content.startswith('!spend'):
+        try:
+            # コマンドから消費する金額を取得
+            amount_to_spend = int(message.content.split()[1])
+
+            if amount_to_spend <= 0:
+                await message.channel.send('消費する金額は1以上で指定してください。')
+                return
+
+            # 残高が十分かチェック
+            if currency[user_id] >= amount_to_spend:
+                currency[user_id] -= amount_to_spend
+                save_currency(currency)
+                await message.channel.send(f'{message.author.mention}は {amount_to_spend} コインを消費しました。')
+            else:
+                await message.channel.send(f'{message.author.mention}、残高が足りません。')
+        except (IndexError, ValueError):
+            # 金額が指定されていないか、数字でない場合のエラー処理
+            await message.channel.send('使い方が間違っています。`!spend <金額>` のように入力してください。')
+
+
+    
+
+    
     # 特定のメッセージへの応答
     if message.content.startswith('ぼれろ、ごはん'):
         responses = [
