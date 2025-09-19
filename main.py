@@ -120,8 +120,7 @@ async def on_message(message):
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
-
-    # リアクション機能は独立したif文のままでOK
+        
     if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
