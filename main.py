@@ -2,9 +2,10 @@ import discord
 import os
 import random
 import json
+import time  # <-- timeモジュールを追加
 from keep_alive import keep_alive
 
-# ユーザーデータの読み込みと保存
+# 1. ユーザーデータの読み込みと保存
 def load_currency():
     try:
         with open('currency.json', 'r') as f:
@@ -18,6 +19,9 @@ def save_currency(currency_data):
 
 currency = load_currency()
 
+# 最後に通貨を獲得した時間を記録する辞書
+last_earn_times = {}
+
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
@@ -25,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="お料理"))
+    await client.change_presence(activity=discord.Game(name="おままごと"))
 
 @client.event
 async def on_message(message):
@@ -34,20 +38,29 @@ async def on_message(message):
 
     user_id = str(message.author.id)
 
-    # ユーザーが辞書に存在しない場合は初期化
     if user_id not in currency:
         currency[user_id] = 0
         save_currency(currency)
 
     # 全てのコマンドを一つのif/elifチェーンにまとめる
-    if message.content.startswith('!balance'):
-        await message.channel.send(f'{message.author.mention}の現在の残高は {currency[user_id]} コインです。')
+    if message.content.startswith('ぼれろ、'):
+        await message.channel.send(f'{message.author.display_name}さんの現在の残高は {currency[user_id]} コインです。')
 
-    elif message.content.startswith('!earn'):
-        earned = random.randint(1, 10)
-        currency[user_id] += earned
-        save_currency(currency)
-        await message.channel.send(f'{message.author.mention}は {earned} コインを獲得しました！')
+    elif message.content.startswith('ぼれろ、おこづかいをくださいな'):
+        # クールダウンの設定 (秒)
+        cooldown_time = 86400
+        
+        # 最後に獲得した時間をチェック
+        if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
+            remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
+            await message.channel.send(f'{message.author.display_name}さん、もうもらったでしょ〜')
+        else:
+            # 新しい通貨を獲得
+            earned = random.randint(20, 50)
+            currency[user_id] += earned
+            last_earn_times[user_id] = time.time()  # タイムスタンプを更新
+            save_currency(currency)
+            await message.channel.send(f'{message.author.display_name}さんに {earned} ターノあげる〜！')
 
     elif message.content.startswith('!spend'):
         try:
@@ -58,9 +71,9 @@ async def on_message(message):
             if currency[user_id] >= amount_to_spend:
                 currency[user_id] -= amount_to_spend
                 save_currency(currency)
-                await message.channel.send(f'{message.author.mention}は {amount_to_spend} コインを消費しました。')
+                await message.channel.send(f'{message.author.display_name}さんは {amount_to_spend} コインを消費しました。')
             else:
-                await message.channel.send(f'{message.author.mention}、残高が足りません。')
+                await message.channel.send(f'{message.author.display_name}さん、残高が足りません。')
         except (IndexError, ValueError):
             await message.channel.send('使い方が間違っています。`!spend <金額>` のように入力してください。')
 
