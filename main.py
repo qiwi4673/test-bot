@@ -27,35 +27,26 @@ async def on_ready():
     print('ログインしました')
     await client.change_presence(activity=discord.Game(name="お料理"))
 
-# on_message関数をon_ready関数の外側に移動
 @client.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == client.user or message.author.bot:
         return
 
-    # ボットが送信したメッセージを無視
-    if message.author.bot:
-        return
-    
     user_id = str(message.author.id)
-
-    # ユーザーが辞書に存在しない場合は初期化
     if user_id not in currency:
         currency[user_id] = 0
         save_currency(currency)
 
-    # '!balance' コマンドで残高を表示
+    # 全てのコマンドを一つのif/elifチェーンにまとめる
     if message.content.startswith('!balance'):
         await message.channel.send(f'{message.author.mention}の現在の残高は {currency[user_id]} コインです。')
 
-    # '!earn' コマンドで通貨を増やす
     elif message.content.startswith('!earn'):
         earned = random.randint(1, 10)
         currency[user_id] += earned
         save_currency(currency)
         await message.channel.send(f'{message.author.mention}は {earned} コインを獲得しました！')
 
-    # '!spend' コマンドで通貨を消費
     elif message.content.startswith('!spend'):
         try:
             amount_to_spend = int(message.content.split()[1])
@@ -71,8 +62,7 @@ async def on_message(message):
         except (IndexError, ValueError):
             await message.channel.send('使い方が間違っています。`!spend <金額>` のように入力してください。')
 
-    # 他のすべての既存の機能もここに記述する
-    if message.content.startswith('ぼれろ、ごはん'):
+    elif message.content.startswith('ぼれろ、ごはん'):
         responses = [
             'きゅうりの浅漬け', 'きゅうりの深漬け', 'きゅうりの漬け物', 'きゅうりの糠漬け',
             '味噌漬けきゅうり', '一本漬けきゅうり', '漬物石', 'ン浪の奢りで焼肉'
@@ -88,14 +78,7 @@ async def on_message(message):
             result_text = '🟪ファンブル...'
         await message.reply(f'rolled: **{dice_result}** \n{result_text}')
     
-    #... (他の「たの」関連のリアクションコードも同様にここにまとめる)
-    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
-        custom_emoji = client.get_emoji(1415213398546714704)
-        if custom_emoji:
-            await message.add_reaction(custom_emoji)
-
-
-    if message.content.startswith('ぼれろ、こんだて'):
+    elif message.content.startswith('ぼれろ、こんだて'):
         subject = ['そば', 'フカヒレスープ', 'パフェ', '小籠包', 'レモン', 'アイスクリーム', 'シュウマイ', 'スープ', '寿司', '春巻き', 'ワッフル', 'ローストチキン', 'シリアル', 'パスタ', 'カツ丼', 'カヌレ', 'フレンチトースト', 'オレンジジュース', '酢豚', '餃子', 'プリン', 'もつ鍋', 'クリームチーズ', 'パンケーキ', 'ナッツ', 'カレーライス', 'ホットドッグ', 'ショートケーキ', 'フォンダンショコラ', 'スパゲッティ', 'クロワッサン', 'サンドイッチ', 'ミルク', '親子丼', '紅茶', 'しゃぶしゃぶ', 'エビフライ', 'トマト鍋', 'ハンバーガー', 'ドーナツ', 'ピザ', '麻婆豆腐', '北京ダック', '牛丼', 'たこ焼き', 'うどん', 'マカロン', 'パンナコッタ', 'フライドポテト', '天ぷら', '味噌汁', '回鍋肉', 'キムチ鍋', 'クッキー', 'ラーメン', 'クレープ', '焼き肉', 'エビチリ', 'コーヒー', 'マフィン', 'チーズケーキ']
         action = [
             "を焼いたもの", "を煮たもの", "を炒めたもの", "を揚げたもの", "を蒸したもの",
@@ -107,8 +90,7 @@ async def on_message(message):
         random_action = random.choice(action)
         await message.channel.send(f'{random_subject}{random_action}はどうかな？')
 
-
-    if message.content.startswith('ぼれろ〜'):
+    elif message.content.startswith('ぼれろ〜'):
         if len(message.content.strip()) == 4:
             commonreply = ['どうしました〜？','なぁに〜？','ん〜？','とってもすごいBoleroです！']
             random_commonreply = random.choice(commonreply)
@@ -120,7 +102,7 @@ async def on_message(message):
             random_letter = random.choice(letter)
             await message.channel.send(f'{random_agreement}、{random_letter}〜。')
 
-    if message.content.startswith('ぼれろ、えもじ'):
+    elif message.content.startswith('ぼれろ、えもじ'):
         animal_emojis = [
             '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯',
             '🦁', '🐮', '🐷', '🐸', '🐵', '🐒', '🐔', '🐧', '🦅', '🦉',
@@ -130,12 +112,18 @@ async def on_message(message):
         random_emoji = random.choice(animal_emojis)
         await message.add_reaction(random_emoji)
 
-    if message.content.strip().endswith('か？'):
+    elif message.content.strip().endswith('かな？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜']
         questionletter = ['違うかも〜','そうかも〜','違うよ〜','そうだよ〜']
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
+
+    # リアクション機能は独立したif文のままでOK
+    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
+        custom_emoji = client.get_emoji(1415213398546714704)
+        if custom_emoji:
+            await message.add_reaction(custom_emoji)
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
