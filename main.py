@@ -70,7 +70,30 @@ async def on_message(message):
         if currency[user_id] >= amount_to_spend:
             currency[user_id] -= amount_to_spend
             save_currency(currency)
-            await message.channel.send(f'{message.author.display_name}ちゃんからもらった {amount_to_spend} ターノで買ってきたよ〜！')
+            items = [
+    '【C】カルパス', '【C】ソーダ', '【C】お茶', '【C】シーグラス', '【C】えんぴつ',
+    '【C】トマト', '【C】しゃこパン', '【C】付箋', '【C】おにぎり', '【C】にんじん',
+    '【C】じゃがいも', '【UC】グミ', '【UC】コーラ', '【UC】消しゴム', '【UC】チョコレート',
+    '【UC】かぼちゃ', '【UC】ヨーヨー', '【UC】メロンパン', '【UC】メロンソーダ',
+    '【UC】ハンカチ', '【R】マグカップ', '【R】ミニチュアフィギュア', '【R】メンチカツ',
+    '【R】フェイスタオル', '【R】クリアボトル', '【R】ライト', '【SR】クッション',
+    '【SR】お布団', '【SR】ぬいぐるみ', '【SR】スーツ', '【SR】まくら',
+    '【HR】マグロ', '【HR】マツタケ', '【HR】和牛', '【UR】月の土地'
+]
+
+        
+        # 2. 排出確率 (正規化する必要はありません。合計が100である必要もありません)
+        # 例えば、ウルトラレアアイテムの排出確率を0.5%にしたい場合、
+        # 他のアイテムの確率をこれに合わせて調整します。
+        weights = [100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
+        
+        # 3. random.choices()を使ってランダムにアイテムを選択
+        pulled_item = random.choices(items, weights=weights, k=1)[0]
+        
+        # 結果を送信
+        await message.channel.send(f'{message.author.mention}がガチャを引きました！\n結果は... **{pulled_item}** です！')
+            
+            await message.channel.send(f'{message.author.display_name}ちゃんからもらった{amount_to_spend} ターノで {pulled_item} を買ってきたよ〜！')
         else:
             await message.channel.send(f'{message.author.display_name}ちゃんのターノだと買えないかも......!')
 
@@ -130,22 +153,6 @@ async def on_message(message):
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
-
-    if message.content.startswith('!gacha'):
-        # 1. アイテムのリスト
-        items = ['ノーマルアイテム', 'レアアイテム', 'スーパーレアアイテム', 'ウルトラレアアイテム']
-        
-        # 2. 排出確率 (正規化する必要はありません。合計が100である必要もありません)
-        # 例えば、ウルトラレアアイテムの排出確率を0.5%にしたい場合、
-        # 他のアイテムの確率をこれに合わせて調整します。
-        weights = [90, 8, 1.5, 0.5]
-        
-        # 3. random.choices()を使ってランダムにアイテムを選択
-        pulled_item = random.choices(items, weights=weights, k=1)[0]
-        
-        # 結果を送信
-        await message.channel.send(f'{message.author.mention}がガチャを引きました！\n結果は... **{pulled_item}** です！')
-
     
     # リアクション機能は独立したif文のままでOK
     if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
