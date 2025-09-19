@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="おままごと"))
+    await client.change_presence(activity=discord.Game(name="おにごっこ"))
 
 @client.event
 async def on_message(message):
@@ -44,7 +44,7 @@ async def on_message(message):
 
     # 全てのコマンドを一つのif/elifチェーンにまとめる
     if message.content.startswith('ぼれろ、しょうかい'):
-        await message.channel.send(f'{message.author.display_name}さんの現在の残高は {currency[user_id]} コインです。')
+        await message.channel.send(f'{message.author.display_name}さんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
 
     elif message.content.startswith('ぼれろ、おこづかい'):
         # クールダウンの設定 (秒)
@@ -56,26 +56,23 @@ async def on_message(message):
             await message.channel.send(f'{message.author.display_name}さん、もうもらったでしょ〜')
         else:
             # 新しい通貨を獲得
-            earned = random.randint(20, 50)
+            earned = random.randint(200, 400)
             currency[user_id] += earned
             last_earn_times[user_id] = time.time()  # タイムスタンプを更新
             save_currency(currency)
             await message.channel.send(f'{message.author.display_name}さんに {earned} ターノあげる〜！')
 
-    elif message.content.startswith('!spend'):
-        try:
-            amount_to_spend = int(message.content.split()[1])
-            if amount_to_spend <= 0:
-                await message.channel.send('消費する金額は1以上で指定してください。')
-                return
-            if currency[user_id] >= amount_to_spend:
-                currency[user_id] -= amount_to_spend
-                save_currency(currency)
-                await message.channel.send(f'{message.author.display_name}さんは {amount_to_spend} コインを消費しました。')
-            else:
-                await message.channel.send(f'{message.author.display_name}さん、残高が足りません。')
-        except (IndexError, ValueError):
-            await message.channel.send('使い方が間違っています。`!spend <金額>` のように入力してください。')
+    elif message.content == 'ぼれろ、おみくじ':
+        # 消費する金額を180に固定
+        amount_to_spend = 180
+        
+        # 残高が十分かチェック
+        if currency[user_id] >= amount_to_spend:
+            currency[user_id] -= amount_to_spend
+            save_currency(currency)
+            await message.channel.send(f'{message.author.display_name}は {amount_to_spend} コインを消費しました。')
+        else:
+            await message.channel.send(f'{message.author.display_name}、残高が足りません。')
 
     elif message.content.startswith('ぼれろ、ごはん'):
         responses = [
