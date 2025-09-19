@@ -25,7 +25,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="おままごと"))
+    await client.change_presence(activity=discord.Game(name="お料理"))
 
 @client.event
 async def on_message(message):
@@ -130,4 +130,3 @@ async def on_message(message):
 TOKEN = os.getenv("DISCORD_TOKEN")
 keep_alive()
 client.run(TOKEN)
-
