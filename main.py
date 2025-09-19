@@ -62,7 +62,7 @@ async def on_message(message):
             save_currency(currency)
             await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
-    elif message.content == 'ぼれろ、おみくじ':
+    elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
         amount_to_spend = 180
         
@@ -70,9 +70,9 @@ async def on_message(message):
         if currency[user_id] >= amount_to_spend:
             currency[user_id] -= amount_to_spend
             save_currency(currency)
-            await message.channel.send(f'{message.author.display_name}は {amount_to_spend} コインを消費しました。')
+            await message.channel.send(f'{message.author.display_name}ちゃんからもらった {amount_to_spend} ターノで買ってきたよ〜！')
         else:
-            await message.channel.send(f'わわっ、{message.author.display_name}ちゃんのターノが足りないみたい......!')
+            await message.channel.send(f'{message.author.display_name}ちゃんのターノだと買えないかも......!')
 
     elif message.content.startswith('ぼれろ、ごはん'):
         responses = [
@@ -131,6 +131,22 @@ async def on_message(message):
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
 
+    if message.content.startswith('!gacha'):
+        # 1. アイテムのリスト
+        items = ['ノーマルアイテム', 'レアアイテム', 'スーパーレアアイテム', 'ウルトラレアアイテム']
+        
+        # 2. 排出確率 (正規化する必要はありません。合計が100である必要もありません)
+        # 例えば、ウルトラレアアイテムの排出確率を0.5%にしたい場合、
+        # 他のアイテムの確率をこれに合わせて調整します。
+        weights = [90, 8, 1.5, 0.5]
+        
+        # 3. random.choices()を使ってランダムにアイテムを選択
+        pulled_item = random.choices(items, weights=weights, k=1)[0]
+        
+        # 結果を送信
+        await message.channel.send(f'{message.author.mention}がガチャを引きました！\n結果は... **{pulled_item}** です！')
+
+    
     # リアクション機能は独立したif文のままでOK
     if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
