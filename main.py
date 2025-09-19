@@ -33,11 +33,13 @@ async def on_message(message):
         return
 
     user_id = str(message.author.id)
+
+    # ユーザーが辞書に存在しない場合は初期化
     if user_id not in currency:
         currency[user_id] = 0
         save_currency(currency)
 
-    # 全てのコマンドを一つのif/elifチェーンにまとめる
+    # ここから一つのif/elifチェーンでコマンドをまとめる
     if message.content.startswith('!balance'):
         await message.channel.send(f'{message.author.mention}の現在の残高は {currency[user_id]} コインです。')
 
@@ -68,7 +70,7 @@ async def on_message(message):
             '味噌漬けきゅうり', '一本漬けきゅうり', '漬物石', 'ン浪の奢りで焼肉'
         ]
         await message.channel.send(random.choice(responses))
-    
+
     elif message.content == 'たけ':
         dice_result = random.randint(1, 100)
         result_text = ''
@@ -112,7 +114,7 @@ async def on_message(message):
         random_emoji = random.choice(animal_emojis)
         await message.add_reaction(random_emoji)
 
-    elif message.content.strip().endswith('かな？'):
+    elif message.content.strip().endswith('か？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜']
         questionletter = ['違うかも〜','そうかも〜','違うよ〜','そうだよ〜']
         random_questionagree = random.choice(questionagree)
