@@ -63,13 +63,13 @@ async def on_message(message):
             await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
     elif message.content == 'ぼれろ、おつかい':
-        # 消費する金額を180に固定
         amount_to_spend = 180
         
-        # 残高が十分かチェック
+        # 残高チェック
         if currency[user_id] >= amount_to_spend:
             currency[user_id] -= amount_to_spend
             save_currency(currency)
+
             items = [
                 '【C】カルパス', '【C】ソーダ', '【C】お茶', '【C】シーグラス', '【C】えんぴつ',
                 '【C】トマト', '【C】しゃこパン', '【C】付箋', '【C】おにぎり', '【C】にんじん',
