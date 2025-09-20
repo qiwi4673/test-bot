@@ -2,7 +2,7 @@ import discord
 import os
 import random
 import json
-import time
+import time  # <-- timeモジュールを追加
 from keep_alive import keep_alive
 
 # 1. ユーザーデータの読み込みと保存
@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="お人形遊び"))
+    await client.change_presence(activity=discord.Game(name="自転車練習動画"))
 
 @client.event
 async def on_message(message):
@@ -48,6 +48,7 @@ async def on_message(message):
 
     elif message.content.startswith('ぼれろ、おこづかい'):
         cooldown_time = 86400
+        
         if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
             remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
             await message.channel.send(f'{message.author.display_name}ちゃん、もうもらったでしょ〜')
@@ -59,25 +60,32 @@ async def on_message(message):
             await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
     elif message.content == 'ぼれろ、おつかい':
+        # 消費する金額を180に固定
         amount_to_spend = 180
-        if currency[user_id] >= amount_to_spend:
-            currency[user_id] -= amount_to_spend
-            save_currency(currency)
-            items = [
-                '【C】カルパス', '【C】ソーダ', '【C】お茶', '【C】シーグラス', '【C】えんぴつ',
-                '【C】トマト', '【C】しゃこパン', '【C】付箋', '【C】おにぎり', '【C】にんじん',
-                '【C】じゃがいも', '【UC】グミ', '【UC】コーラ', '【UC】消しゴム', '【UC】チョコレート',
-                '【UC】かぼちゃ', '【UC】ヨーヨー', '【UC】メロンパン', '【UC】メロンソーダ',
-                '【UC】ハンカチ', '【R】マグカップ', '【R】ミニチュアフィギュア', '【R】メンチカツ',
-                '【R】フェイスタオル', '【R】クリアボトル', '【R】ライト', '【SR】クッション',
-                '【SR】お布団', '【SR】ぬいぐるみ', '【SR】スーツ', '【SR】まくら',
-                '【HR】マグロ', '【HR】マツタケ', '【HR】和牛', '【UR】月の土地'
-            ]
-            weights = [100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
-            pulled_item = random.choices(items, weights=weights, k=1)[0]
-            await message.channel.send(f'{message.author.display_name}ちゃんに{amount_to_spend} ターノ渡したよ〜！代わりに {pulled_item} を買ってきたよ〜！')
-        else:
-            await message.channel.send(f'{message.author.display_name}ちゃんのターノだと買えないかも......!')
+        
+        try:
+            # 残高が十分かチェック
+            if currency[user_id] >= amount_to_spend:
+                currency[user_id] -= amount_to_spend
+                save_currency(currency)
+                items = [
+                    '【C】カルパス', '【C】ソーダ', '【C】お茶', '【C】シーグラス', '【C】えんぴつ',
+                    '【C】トマト', '【C】しゃこパン', '【C】付箋', '【C】おにぎり', '【C】にんじん',
+                    '【C】じゃがいも', '【UC】グミ', '【UC】コーラ', '【UC】消しゴム', '【UC】チョコレート',
+                    '【UC】かぼちゃ', '【UC】ヨーヨー', '【UC】メロンパン', '【UC】メロンソーダ',
+                    '【UC】ハンカチ', '【R】マグカップ', '【R】ミニチュアフィギュア', '【R】メンチカツ',
+                    '【R】フェイスタオル', '【R】クリアボトル', '【R】ライト', '【SR】クッション',
+                    '【SR】お布団', '【SR】ぬいぐるみ', '【SR】スーツ', '【SR】まくら',
+                    '【HR】マグロ', '【HR】マツタケ', '【HR】和牛', '【UR】月の土地'
+                ]
+                weights = [100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
+                pulled_item = random.choices(items, weights=weights, k=1)[0]
+                await message.channel.send(f'{message.author.display_name}ちゃんからもらった{amount_to_spend} ターノで {pulled_item} を買ってきたよ〜！')
+            else:
+                await message.channel.send(f'{message.author.display_name}ちゃんのターノだと買えないかも......!')
+        except Exception as e:
+            # エラーが発生した場合にエラー内容を表示
+            await message.channel.send(f'ごめんね、おつかい中にエラーが発生したみたい: `{e}`')
 
     elif message.content.startswith('ぼれろ、ごはん'):
         responses = [
@@ -136,7 +144,6 @@ async def on_message(message):
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
 
-    # リアクション機能は独立したif文のままでOK
     if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
