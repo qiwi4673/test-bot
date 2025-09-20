@@ -2,7 +2,7 @@ import discord
 import os
 import random
 import json
-import time  # <-- timeモジュールを追加
+import time
 from keep_alive import keep_alive
 
 # 1. ユーザーデータの読み込みと保存
@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="自転車練習動画"))
+    await client.change_presence(activity=discord.Game(name="お人形遊び"))
 
 @client.event
 async def on_message(message):
@@ -47,29 +47,22 @@ async def on_message(message):
         await message.channel.send(f'{message.author.display_name}ちゃんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
 
     elif message.content.startswith('ぼれろ、おこづかい'):
-        # クールダウンの設定 (秒)
         cooldown_time = 86400
-        
-        # 最後に獲得した時間をチェック
         if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
             remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
             await message.channel.send(f'{message.author.display_name}ちゃん、もうもらったでしょ〜')
         else:
-            # 新しい通貨を獲得
             earned = random.randint(200, 400)
             currency[user_id] += earned
-            last_earn_times[user_id] = time.time()  # タイムスタンプを更新
+            last_earn_times[user_id] = time.time()
             save_currency(currency)
             await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         amount_to_spend = 180
-        
-        # 残高チェック
         if currency[user_id] >= amount_to_spend:
             currency[user_id] -= amount_to_spend
             save_currency(currency)
-
             items = [
                 '【C】カルパス', '【C】ソーダ', '【C】お茶', '【C】シーグラス', '【C】えんぴつ',
                 '【C】トマト', '【C】しゃこパン', '【C】付箋', '【C】おにぎり', '【C】にんじん',
@@ -82,7 +75,7 @@ async def on_message(message):
             ]
             weights = [100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
             pulled_item = random.choices(items, weights=weights, k=1)[0]
-            await message.channel.send(f'{message.author.display_name}ちゃんからもらった{amount_to_spend} ターノで {pulled_item} を買ってきたよ〜！')
+            await message.channel.send(f'{message.author.display_name}ちゃんに{amount_to_spend} ターノ渡したよ〜！代わりに {pulled_item} を買ってきたよ〜！')
         else:
             await message.channel.send(f'{message.author.display_name}ちゃんのターノだと買えないかも......!')
 
