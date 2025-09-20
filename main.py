@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="自転車練習動画"))
+    await client.change_presence(activity=discord.Game(name="お人形遊び"))
 
 @client.event
 async def on_message(message):
@@ -78,7 +78,7 @@ async def on_message(message):
                     '【SR】お布団', '【SR】ぬいぐるみ', '【SR】スーツ', '【SR】まくら',
                     '【HR】マグロ', '【HR】マツタケ', '【HR】和牛', '【UR】月の土地'
                 ]
-                weights = [100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
+                weights = [100,100,100,100,100,100,100,100,100,100,100,90,90,90,90,90,90,90,90,90,70,70,70,70,70,70,40,40,40,40,40,25,25,25,3]
                 pulled_item = random.choices(items, weights=weights, k=1)[0]
                 await message.channel.send(f'{message.author.display_name}ちゃんからもらった{amount_to_spend} ターノで {pulled_item} を買ってきたよ〜！')
             else:
