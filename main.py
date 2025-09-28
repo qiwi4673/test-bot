@@ -137,7 +137,7 @@ async def on_message(message):
         random_emoji = random.choice(animal_emojis)
         await message.add_reaction(random_emoji)
 
-        elif message.content.startswith('ぼれろ、10連ガチャ'):
+    elif message.content.startswith('ぼれろ、10連ガチャ'):
         roushi = ['【R】懇浪','【R】コンコン','【R】浪士','【R】ン浪','【R】ろーし','【R】:gotume~kawauso:','【R】ヤクザ','【R】きつねうどん','【R】うどんきつね','【R】おあげ','【R】キツネ','【SR】コンコン浪士','【SR】懇々浪士','【SR】組長','【SR】コンコン浪士"メイド服"','【SR】コンコン浪士"チーパオ"','【SR】コンコン浪士"ディアンドル"','【SR】伝説の名前','【SR】著名な祖父を持ちし孫','【HR】ろうてゃ']
         roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1]
         
