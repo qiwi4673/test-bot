@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="三輪車"))
+    await client.change_presence(activity=discord.Game(name="お裁縫"))
 
 @client.event
 async def on_message(message):
@@ -149,7 +149,7 @@ async def on_message(message):
         
         await message.reply(f'10連ガチャだよ〜！\n\n{result_message} \nいいのでたかな？')
         
-    elif message.content.strip().endswith('か？'):
+    elif message.content.strip().endswith('かな？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜']
         questionletter = ['違うかも〜','そうかも〜','違うよ〜','そうだよ〜']
         random_questionagree = random.choice(questionagree)
