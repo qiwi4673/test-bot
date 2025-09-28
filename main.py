@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="お人形遊び"))
+    await client.change_presence(activity=discord.Game(name="三輪車"))
 
 @client.event
 async def on_message(message):
@@ -147,7 +147,7 @@ async def on_message(message):
         # 結果をまとめて一つの文字列にする
         result_message = '\n'.join(pulled_items)
         
-        await message.channel.send(f'{message.author.display_name}ちゃんの10連ガチャだよ〜！\n\n{result_message}')
+        await message.reply(f'10連ガチャだよ〜！\n\n{result_message} \nいいのでたかな？')
         
     elif message.content.strip().endswith('か？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜']
