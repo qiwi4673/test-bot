@@ -137,21 +137,17 @@ async def on_message(message):
         random_emoji = random.choice(animal_emojis)
         await message.add_reaction(random_emoji)
 
-    elif message.content.startswitch('10連ガチャ'):
+        elif message.content.startswith('ぼれろ、10連ガチャ'):
         roushi = ['【R】懇浪','【R】コンコン','【R】浪士','【R】ン浪','【R】ろーし','【R】:gotume~kawauso:','【R】ヤクザ','【R】きつねうどん','【R】うどんきつね','【R】おあげ','【R】キツネ','【SR】コンコン浪士','【SR】懇々浪士','【SR】組長','【SR】コンコン浪士"メイド服"','【SR】コンコン浪士"チーパオ"','【SR】コンコン浪士"ディアンドル"','【SR】伝説の名前','【SR】著名な祖父を持ちし孫','【HR】ろうてゃ']
         roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1]
-        pra = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prb = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prc = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prd = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        pre = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prf = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prg = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prh = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        pri = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
-        prj = random.choices(roushi, rouahiweight=rousiweight, k=1)[0]
         
-        await message.channel.send(f'{pra} \n{prb} \n{prc} \n{prd} \n{pre} \n{prf} \n{prg} \n{prh} \n{pri} \n{prj}')
+        # random.choicesを使って、リストから10個のアイテムを重み付けに基づいて選択
+        pulled_items = random.choices(roushi, weights=roushiweight, k=10)
+        
+        # 結果をまとめて一つの文字列にする
+        result_message = '\n'.join(pulled_items)
+        
+        await message.channel.send(f'{message.author.display_name}ちゃんの10連ガチャだよ〜！\n\n{result_message}')
         
     elif message.content.strip().endswith('か？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜']
