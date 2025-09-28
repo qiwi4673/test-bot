@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="お裁縫"))
+    await client.change_presence(activity=discord.Game(name="千物語"))
 
 @client.event
 async def on_message(message):
@@ -138,8 +138,8 @@ async def on_message(message):
         await message.add_reaction(random_emoji)
 
     elif message.content.startswith('10連コンコンガチャ'):
-        roushi = ['★☆☆懇浪','★☆☆コンコン','★☆☆浪士','★☆☆ン浪','★☆☆ろーし','★☆☆:gotume~kawauso:','★☆☆ヤクザ','★☆☆きつねうどん','★☆☆うどんきつね','★☆☆おあげ','★☆☆キツネ','★★☆コンコン浪士','★★☆懇々浪士','★★☆組長','★★☆コンコン浪士"メイド服"','★★☆コンコン浪士"チーパオ"','★★☆コンコン浪士"ディアンドル"','★★☆伝説の名前','★★☆著名な祖父を持ちし孫','★★★★★ろうてゃ']
-        roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1]
+        roushi = ['★☆☆懇浪','★☆☆コンコン','★☆☆浪士','★☆☆ン浪','★☆☆ろーし','★☆☆:gotume~kawauso:','★☆☆ヤクザ','★☆☆きつねうどん','★☆☆うどんきつね','★☆☆おあげ','★☆☆キツネ','★★☆コンコン浪士','★★☆懇々浪士','★★☆組長','★★☆コンコン浪士"メイド服"','★★☆コンコン浪士"チーパオ"','★★☆コンコン浪士"ディアンドル"','★★☆伝説の名前','★★☆著名な祖父を持ちし孫','★★★★★ろうてゃ','★★★コンコン老人','★★★★士浪ンコンコ',]
+        roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1,3,2]
         
         # random.choicesを使って、リストから10個のアイテムを重み付けに基づいて選択
         pulled_items = random.choices(roushi, weights=roushiweight, k=10)
@@ -150,8 +150,8 @@ async def on_message(message):
         await message.reply(f'10連ガチャだよ〜！\n\n{result_message} \nいいのでたかな？')
         
     elif message.content.strip().endswith('かな？'):
-        questionagree = ['うん、','えっ','う〜ん','ん〜']
-        questionletter = ['違うかも〜','そうかも〜','違うよ〜','そうだよ〜']
+        questionagree = ['うん、','えっ','う〜ん','ん〜','もしかしたら']
+        questionletter = ['違うかも〜','そうかも〜','もしかするかも〜']
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
