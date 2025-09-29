@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="お裁縫"))
+    await client.change_presence(activity=discord.Game(name="Wii"))
 
 @client.event
 async def on_message(message):
