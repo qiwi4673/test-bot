@@ -149,17 +149,17 @@ async def on_message(message):
         
         await message.reply(f'10連ガチャだよ〜！\n\n{result_message} \nいいのでたかな？')
 
-    elif message.content.startswith('1000連コンコンガチャ'):
+    elif message.content.startswith('100連コンコンガチャ'):
         rousi = ['★☆☆懇浪','★☆☆コンコン','★☆☆浪士','★☆☆ン浪','★☆☆ろーし','★☆☆:gotume~kawauso:','★☆☆ヤクザ','★☆☆きつねうどん','★☆☆うどんきつね','★☆☆おあげ','★☆☆キツネ','★★☆コンコン浪士','★★☆懇々浪士','★★☆組長','★★☆コンコン浪士"メイド服"','★★☆コンコン浪士"チーパオ"','★★☆コンコン浪士"ディアンドル"','★★☆伝説の名前','★★☆著名な祖父を持ちし孫','★★★★★ろうてゃ','★★★コンコン老人','★★★★士浪ンコンコ',]
         rousiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1,3,2]
         
         # random.choicesを使って、リストから10個のアイテムを重み付けに基づいて選択
-        pull_rousi = random.choices(rousi, weights=rousiweight, k=1000)
+        pull_rousi = random.choices(rousi, weights=rousiweight, k=100)
         
         # 結果をまとめて一つの文字列にする
         result_rousi = '\n'.join(pull_rousi)
         
-        await message.reply(f'1000連ガチャだよ〜！\n\n{result_rousi} \nいいのでたかな？')
+        await message.reply(f'100連ガチャだよ〜！\n\n{result_rousi} \nいいのでたかな？')
         
     elif message.content.strip().endswith('かな？'):
         questionagree = ['うん、','えっ','う〜ん','ん〜','もしかしたら']
