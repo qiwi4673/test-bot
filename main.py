@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="Wii"))
+    await client.change_presence(activity=discord.Game(name="WⅡ"))
 
 @client.event
 async def on_message(message):
@@ -139,7 +139,7 @@ async def on_message(message):
 
     elif message.content.startswith('10連コンコンガチャ'):
         roushi = ['★☆☆懇浪','★☆☆コンコン','★☆☆浪士','★☆☆ン浪','★☆☆ろーし','★☆☆:gotume~kawauso:','★☆☆ヤクザ','★☆☆きつねうどん','★☆☆うどんきつね','★☆☆おあげ','★☆☆キツネ','★★☆コンコン浪士','★★☆懇々浪士','★★☆組長','★★☆コンコン浪士"メイド服"','★★☆コンコン浪士"チーパオ"','★★☆コンコン浪士"ディアンドル"','★★☆伝説の名前','★★☆著名な祖父を持ちし孫','★★★★★ろうてゃ','★★★コンコン老人','★★★★士浪ンコンコ',]
-        roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1,5,3]
+        roushiweight = [100,100,100,100,100,100,100,100,100,100,100,15,15,15,15,15,15,15,15,1000000,5,3]
         
         # random.choicesを使って、リストから10個のアイテムを重み付けに基づいて選択
         pulled_items = random.choices(roushi, weights=roushiweight, k=10)
