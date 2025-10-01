@@ -46,18 +46,18 @@ async def on_message(message):
     if message.content.startswith('ぼれろ、しょうかい'):
         await message.channel.send(f'{message.author.display_name}ちゃんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
 
-    elif message.content.startswith('ぼれろ、おこづかい'):
+    elif message.content.startswith('ぼれろ、うんだめし'):
         cooldown_time = 86400
         
         if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
             remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
-            await message.channel.send(f'{message.author.display_name}ちゃん、もうもらったでしょ〜')
+            await message.reply(f'1日1回までだよ〜')
         else:
             earned = random.randint(200, 400)
             currency[user_id] += earned
             last_earn_times[user_id] = time.time()
             save_currency(currency)
-            await message.channel.send(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
+            await message.reply(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
@@ -167,7 +167,7 @@ async def on_message(message):
         random_questionagree = random.choice(questionagree)
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
-
+    
     if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or 'tano' in message.content or '北野' in message.content or '北の' in message.content or '頼め' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
