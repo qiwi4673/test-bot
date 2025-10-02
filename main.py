@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="Wii"))
+    await client.change_presence(activity=discord.Game(name="編み物"))
 
 @client.event
 async def on_message(message):
@@ -57,7 +57,7 @@ async def on_message(message):
             currency[user_id] += earned
             last_earn_times[user_id] = time.time()
             save_currency(currency)
-            await message.reply(f'{message.author.display_name}ちゃんに {earned} ターノあげる〜！')
+            await message.reply(f'{message.author.display_name}ちゃんの運勢は〜、')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
@@ -168,7 +168,7 @@ async def on_message(message):
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
     
-    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or 'tano' in message.content or '北野' in message.content or '北の' in message.content or '頼め' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
+    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '頼ま' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or 'tano' in message.content or '北野' in message.content or '北の' in message.content or '頼め' in message.content or '頼む' in message.content or '頼もう' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
             await message.add_reaction(custom_emoji)
