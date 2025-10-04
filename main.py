@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="編み物"))
+    await client.change_presence(activity=discord.Game(name="三輪車"))
 
 @client.event
 async def on_message(message):
@@ -57,7 +57,20 @@ async def on_message(message):
             currency[user_id] += earned
             last_earn_times[user_id] = time.time()
             save_currency(currency)
-            await message.reply(f'{message.author.display_name}ちゃんの運勢は〜、')
+            luck_lank = ['いい感じ','好調','絶好調','やや悪']
+            luck_msga = ['隣の人が' ,'近くのものが','足の小指が','目の前で','おとといの夜ごはんが','朝起きた時に','料理中に','お散歩中に']
+            luck_msgb = ['はんぺんになる','土に埋まる','見つかる','食べられる','溶ける','光る']
+            lc = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F',]
+            rnd_luck_lank = random.choice(luck_lank)
+            rnd_luck_msga = random.choice(luck_msga)
+            rnd_luck_msgb = random.choice(luck_msgb)
+            rnd_lca = random.choice(lc)
+            rnd_lcb = random.choice(lc)
+            rnd_lcc = random.choice(lc)
+            rnd_lcd = random.choice(lc)
+            rnd_lce = random.choice(lc)
+            rnd_lcf = random.choice(lc)
+            await message.reply(f'{message.author.display_name}ちゃんの運勢は〜、 \n{rnd_luck_lank}で〜、{rnd_luck_msga}、{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
