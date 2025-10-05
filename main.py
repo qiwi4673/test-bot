@@ -47,11 +47,11 @@ async def on_message(message):
         await message.channel.send(f'{message.author.display_name}ちゃんのおこづかいはね、 {currency[user_id]} ターノだよ〜。')
 
     elif message.content.startswith('ぼれろ、うんだめし'):
-        cooldown_time = 86400
+        cooldown_time = 600
         
         if user_id in last_earn_times and (time.time() - last_earn_times[user_id] < cooldown_time):
             remaining_time = int(cooldown_time - (time.time() - last_earn_times[user_id]))
-            await message.reply(f'1日1回までだよ〜')
+            await message.reply(f'10分に1回占うよ〜')
         else:
             earned = random.randint(200, 400)
             currency[user_id] += earned
@@ -70,7 +70,7 @@ async def on_message(message):
             rnd_lcd = random.choice(lc)
             rnd_lce = random.choice(lc)
             rnd_lcf = random.choice(lc)
-            await message.reply(f'{message.author.display_name}ちゃんの運勢は〜、 \n{rnd_luck_lank}で〜、{rnd_luck_msga}、{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
+            await message.reply(f'{message.author.display_name}ちゃんの今の運勢は〜、 \n{rnd_luck_lank}で〜、{rnd_luck_msga}、{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
