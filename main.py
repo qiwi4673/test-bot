@@ -29,7 +29,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('ログインしました')
-    await client.change_presence(activity=discord.Game(name="三輪車"))
+    await client.change_presence(activity=discord.Game(name="おままごと"))
 
 @client.event
 async def on_message(message):
@@ -181,7 +181,7 @@ async def on_message(message):
         random_questionletter = random.choice(questionletter)
         await message.channel.send(f'{random_questionagree}{random_questionletter}。')
     
-    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or ':gotsume_kawauso:' in message.content or ':gotsume_kawauso~1:' in message.content or '頼ま' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or 'tano' in message.content or '北野' in message.content or '北の' in message.content or '頼め' in message.content or '頼む' in message.content or '頼もう' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
+    if 'たの' in message.content or 'タノ' in message.content or '頼ん' in message.content or '肩の' in message.content or '多能' in message.content or '多脳' in message.content or '板野' in message.content or '愉しい' in message.content or '愉しみ' in message.content or '愉しむ' in message.content or '愉しま' in message.content or '愉しも' in message.content or '愉しめ' in message.content or ':gotsume_kawauso:' in message.content or ':gotsume_kawauso~1:' in message.content or '頼ま' in message.content or '田野' in message.content or '頼もしい' in message.content or '頼み' in message.content or 'TANO' in message.content or 'tano' in message.content or '北野' in message.content or '北の' in message.content or '頼め' in message.content or '頼む' in message.content or '頼もう' in message.content or '楽しい' in message.content or '楽しみ' in message.content:
         custom_emoji = client.get_emoji(1415213398546714704)
         if custom_emoji:
             await message.add_reaction(custom_emoji)
