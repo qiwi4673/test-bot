@@ -70,7 +70,7 @@ async def on_message(message):
             rnd_lcd = random.choice(lc)
             rnd_lce = random.choice(lc)
             rnd_lcf = random.choice(lc)
-            await message.reply(f'{message.author.display_name}ちゃんの今の運勢は〜、 \n{rnd_luck_lank}で〜{rnd_luck_msga}〜{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
+            await message.reply(f'{message.author.display_name}ちゃんの今の運勢は〜、 \n{rnd_luck_lank}で〜{rnd_luck_msga}{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
