@@ -59,7 +59,7 @@ async def on_message(message):
             save_currency(currency)
             luck_lank = ['いい感じ','好調','絶好調','やや悪']
             luck_msga = ['隣の人が' ,'近くのものが','足の小指が','目の前で','おとといの夜ごはんが','朝起きた時に','料理中に','お散歩中に']
-            luck_msgb = ['はんぺんになる','土に埋まる','見つかる','食べられる','溶ける','光る']
+            luck_msgb = ['はんぺんになる','土に埋まる','見つかる','食べられる','溶ける','光る','強くなる','将棋をする']
             lc = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F',]
             rnd_luck_lank = random.choice(luck_lank)
             rnd_luck_msga = random.choice(luck_msga)
@@ -70,7 +70,7 @@ async def on_message(message):
             rnd_lcd = random.choice(lc)
             rnd_lce = random.choice(lc)
             rnd_lcf = random.choice(lc)
-            await message.reply(f'{message.author.display_name}ちゃんの今の運勢は〜、 \n{rnd_luck_lank}で〜{rnd_luck_msga}{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
+            await message.reply(f'{message.author.display_name}ちゃんの今の運勢は〜 \n{rnd_luck_lank}で〜{rnd_luck_msga}{rnd_luck_msgb}かも〜 \nラッキーカラーは#{rnd_lca}{rnd_lcb}{rnd_lcc}{rnd_lcd}{rnd_lce}{rnd_lcf}だよ〜！')
 
     elif message.content == 'ぼれろ、おつかい':
         # 消費する金額を180に固定
